@@ -25,7 +25,42 @@ app.get("/", (req, res) => {
 app.post("/getAbilities", (req, res) => {
   console.log("getAbilities called");
   utils.getAbilities().then((data) => {
-    // console.log(data);
+    res.send(data);
+    console.log("data returned");
+    res.end();
+  });
+});
+
+app.post("/getExperiences", (req, res) => {
+  console.log("getExperiences called");
+  utils.getExperiences().then((data) => {
+    res.send(data);
+    console.log("data returned");
+    res.end();
+  });
+});
+
+app.post("/getLinks", (req, res) => {
+  console.log("getLinks called");
+  utils.getLinks().then((data) => {
+    res.send(data);
+    console.log("data returned");
+    res.end();
+  });
+});
+
+app.post("/getProfile", (req, res) => {
+  console.log("getProfile called");
+  utils.getProfile().then((data) => {
+    res.send(data);
+    console.log("data returned");
+    res.end();
+  });
+});
+
+app.post("/getQuotes", (req, res) => {
+  console.log("getQuotes called");
+  utils.getQuotes().then((data) => {
     res.send(data);
     console.log("data returned");
     res.end();
