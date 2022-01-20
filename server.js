@@ -1,11 +1,7 @@
 // .env file is necessary on project root directory
 if (require("dotenv").config().error) throw ".env file is missing";
 
-// var http = require("http");
-// const axios = require("axios");
 const cors = require("cors");
-// const fs = require("fs");
-// const { resolve } = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const utils = require("./utils");
