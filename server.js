@@ -8,12 +8,15 @@ const cors = require("cors");
 // const { resolve } = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
+const utils = require("./utils");
 const app = express();
 const models = require("./models");
 const mongoose = require("mongoose");
 const dbUrl = process.env.DB_URL;
 app.use(bodyParser.json());
 app.use(cors());
+
+mongoose.connect(dbUrl, { useNewUrlParser: true });
 
 app.get("/", (req, res) => {
   res.writeHead(200, { "Content-Type": "text/html" });
@@ -23,11 +26,14 @@ app.get("/", (req, res) => {
   res.end();
 });
 
-app.post("/data", (req, res) => {
-  const data = getData();
-  console.log(data);
-  res.send(data);
-  res.end();
+app.post("/getAbilities", (req, res) => {
+  console.log("getAbilities called");
+  utils.getAbilities().then((data) => {
+    // console.log(data);
+    res.send(data);
+    console.log("data returned");
+    res.end();
+  });
 });
 
 app.use((req, res, next) => {
@@ -37,18 +43,3 @@ app.use((req, res, next) => {
 app.listen(5001, "localhost", () => {
   console.log("Listening on port 5001");
 });
-
-function getData() {
-  //   mongoose.connect(dbUrl);
-  //   console.log(models.models);
-  mongoose.connect(dbUrl, { useNewUrlParser: true }, async (err) => {
-    try {
-      const abilities = await models("Abilities").find();
-      //   console.log(abilities);
-      return abilities;
-    } catch (ex) {
-      console.log(err);
-    }
-  });
-  return;
-}
