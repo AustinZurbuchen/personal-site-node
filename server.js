@@ -8,6 +8,7 @@ const utils = require("./utils");
 const app = express();
 const models = require("./models");
 const mongoose = require("mongoose");
+const { cannotHaveAUsernamePasswordPort } = require("whatwg-url");
 const dbUrl = process.env.DB_URL;
 app.use(bodyParser.json());
 app.use(cors());
@@ -52,6 +53,15 @@ app.post("/getLinks", (req, res) => {
 app.post("/getProfile", (req, res) => {
   console.log("getProfile called");
   utils.getProfile().then((data) => {
+    res.send(data);
+    console.log("data returned");
+    res.end();
+  });
+});
+
+app.post("/getProfileData", (req, res) => {
+  console.log("getProfileData called");
+  utils.getProfileData().then((data) => {
     res.send(data);
     console.log("data returned");
     res.end();

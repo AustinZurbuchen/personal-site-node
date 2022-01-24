@@ -40,9 +40,21 @@ async function getLinks() {
 async function getProfile() {
   return new Promise(async (resolve, reject) => {
     try {
-      let profile = await models("profile").find({});
+      let profile = await models("profile").find();
       console.log(profile);
       resolve(profile[0]);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+async function getProfileData() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let profileData = await models("profileData").find({});
+      console.log(profileData);
+      resolve(profileData[0]);
     } catch (err) {
       reject(err);
     }
@@ -66,4 +78,5 @@ module.exports = {
   getLinks: getLinks,
   getProfile: getProfile,
   getQuotes: getQuotes,
+  getProfileData: getProfileData,
 };
